@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0B0E12" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Tesla Club SA" />
+  <meta name="description" content="A community-run club for Tesla owners and fans in Cape Town. Independent. Not affiliated with Tesla, Inc." />
+  <title>Tesla Club SA</title>
+  <link rel="icon" href="icons/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --bg: #07090c;
+  --card: #12161c;
+  --line: #232a34;
+  --text: #eef1f5;
+  --muted: #9aa4b2;
+  --teal: #e31937;
+  --teal-ink: #fff7f7;
+  --pink: #ff3fa4;
+  --amber: #ffb02e;
+  --danger: #ff6b7a;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+body {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100dvh;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 46% at 108% -8%, rgba(227, 25, 55, 0.22), transparent 60%),
+    radial-gradient(ellipse 52% 40% at -12% -6%, rgba(227, 25, 55, 0.16), transparent 58%),
+    radial-gradient(ellipse 70% 40% at 50% 120%, rgba(227, 25, 55, 0.06), transparent 50%),
+    var(--bg);
+  z-index: 0;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.7) 50%, transparent 52%),
+    radial-gradient(1px 1px at 28% 62%, rgba(255,255,255,.4) 50%, transparent 52%),
+    radial-gradient(1.2px 1.2px at 46% 28%, rgba(255,255,255,.45) 50%, transparent 52%),
+    radial-gradient(1px 1px at 68% 14%, rgba(255,255,255,.55) 50%, transparent 52%),
+    radial-gradient(1px 1px at 82% 48%, rgba(255,255,255,.35) 50%, transparent 52%),
+    radial-gradient(1.4px 1.4px at 90% 76%, rgba(255,255,255,.4) 50%, transparent 52%),
+    radial-gradient(1px 1px at 8% 84%, rgba(255,255,255,.3) 50%, transparent 52%),
+    radial-gradient(1px 1px at 54% 78%, rgba(255,255,255,.28) 50%, transparent 52%),
+    radial-gradient(1px 1px at 36% 42%, rgba(255,255,255,.25) 50%, transparent 52%);
+  background-size: 280px 360px;
+}
+a { color: var(--teal); text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+img { max-width: 100%; }
+.shell {
+  width: min(450px, 100%);
+  margin: 0 auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
+  background: rgba(7, 9, 12, 0.86);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(35, 42, 52, 0.8);
+}
+.brand { display: flex; align-items: center; gap: 8px; color: var(--text); margin-right: auto; }
+.brand svg, .logo { width: 40px; height: 40px; display: block; flex: none; }
+.hero-mark { margin: 4px 0 14px; }
+.hero-mark .logo { width: 72px; height: 72px; filter: drop-shadow(0 0 16px rgba(227, 25, 55, 0.35)); }
+.nav { display: flex; align-items: center; gap: 8px; }
+.nav a {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  border-radius: 999px;
+}
+.nav a.ghost {
+  border: 1px solid var(--line);
+  background: #0d1116;
+}
+main { flex: 1; padding: 22px 16px 28px; }
+h1, h2, h3 {
+  font-family: Archivo, Inter, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 0.95;
+  margin: 0 0 12px;
+}
+h1 { font-size: 42px; }
+h2 { font-size: 26px; }
+h3 { font-size: 16px; letter-spacing: 0.05em; }
+.glow { color: var(--teal); text-shadow: 0 0 18px rgba(227, 25, 55, 0.75); }
+.eyebrow {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+.lede { color: var(--text); font-size: 17px; margin: 0 0 18px; }
+.muted { color: var(--muted); }
+.fine { color: var(--muted); font-size: 13px; margin: 10px 0 0; }
+.stack { display: flex; flex-direction: column; gap: 10px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 13px 18px;
+  border: 1px solid transparent;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+}
+.btn-primary {
+  background: var(--teal);
+  color: var(--teal-ink);
+  box-shadow: 0 0 22px rgba(227, 25, 55, 0.42);
+}
+.btn-secondary { background: #0d1116; color: var(--text); border-color: var(--line); }
+.btn-wa { background: #1faa59; color: #04210f; box-shadow: 0 0 18px rgba(31, 170, 89, 0.28); }
+.btn-danger { background: transparent; color: var(--danger); border-color: rgba(255, 107, 122, 0.45); }
+.btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+.btn.on { outline: 2px solid var(--teal); }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.cards { display: flex; flex-direction: column; gap: 12px; }
+.card p:last-child { margin-bottom: 0; }
+.card p { margin: 0; color: var(--muted); }
+.card h3 { margin-bottom: 8px; }
+label { display: block; font-size: 13px; font-weight: 650; margin: 12px 0 6px; }
+input, select, textarea {
+  width: 100%;
+  background: #0c1015;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 12px;
+  outline: none;
+}
+textarea { min-height: 88px; resize: vertical; }
+input:focus, select:focus, textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(227, 25, 55, 0.15); }
+.hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
+.error { color: #ffb4bc; font-size: 14px; margin: 8px 0 0; }
+.check { display: flex; gap: 10px; align-items: flex-start; margin: 10px 0; font-size: 14px; }
+.check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--teal); }
+.progress { height: 6px; background: #1b212a; border-radius: 99px; overflow: hidden; margin: 8px 0 16px; }
+.progress span { display: block; height: 100%; background: var(--teal); box-shadow: 0 0 12px rgba(227, 25, 55, 0.6); }
+.date-tile {
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border: 1.5px solid var(--teal);
+  box-shadow: 0 0 16px rgba(227, 25, 55, 0.4), inset 0 0 10px rgba(227, 25, 55, 0.08);
+  background: #07090c;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.date-tile b { font-family: Archivo, sans-serif; font-size: 18px; letter-spacing: 0.02em; }
+.date-tile i { font-style: normal; color: var(--teal); font-size: 11px; margin: 1px 0; opacity: 0.9; font-weight: 800; }
+.date-tile span { font-size: 11px; letter-spacing: 0.14em; color: var(--teal); font-weight: 800; }
+.event-row, .member-card-row { display: flex; gap: 12px; align-items: flex-start; }
+.badge {
+  display: inline-block;
+  background: var(--amber);
+  color: #2a1a00;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 11px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+.amber {
+  background: rgba(255, 176, 46, 0.1);
+  border: 1px solid rgba(255, 176, 46, 0.5);
+  color: #ffe1a8;
+  border-radius: 14px;
+  padding: 14px;
+  margin: 14px 0;
+}
+.amber h3 { color: var(--amber); }
+.draft {
+  background: #3a2a08;
+  color: #ffd98a;
+  border: 1px solid var(--amber);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+.member-card {
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(227, 25, 55, 0.16), transparent 55%),
+    linear-gradient(180deg, #161c24, #10141a);
+  border: 1px solid rgba(227, 25, 55, 0.35);
+  box-shadow: 0 0 28px rgba(227, 25, 55, 0.12);
+  border-radius: 20px;
+  padding: 16px;
+}
+.member-card .kicker { letter-spacing: 0.16em; font-size: 11px; color: var(--teal); font-weight: 800; }
+.member-card .no { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); font-size: 13px; }
+.member-card .who { font-family: Archivo, sans-serif; font-weight: 900; font-size: 26px; text-transform: uppercase; margin: 8px 0 4px; }
+.install {
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+  padding: 12px;
+  background: rgba(18, 22, 28, 0.7);
+}
+.footer {
+  padding: 8px 16px calc(22px + env(safe-area-inset-bottom));
+  color: var(--muted);
+  font-size: 13px;
+}
+.socials, .footer-links { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+.socials a, .footer-links a { color: var(--muted); font-weight: 650; }
+.disclaimer { margin: 0 0 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  border: 1px solid var(--line);
+  background: #0c1015;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.chip.on { border-color: var(--teal); color: var(--teal); box-shadow: 0 0 12px rgba(227, 25, 55, 0.2); }
+hr.fade { border: 0; border-top: 1px solid var(--line); margin: 18px 0; }
+.ok { color: #b6ffe8; }
+.how li { margin: 0 0 8px; color: var(--muted); }
+.how li:last-child { margin-bottom: 0; }
+.member-card .lockup { display: flex; align-items: center; gap: 12px; }
+.rules { margin: 0; padding-left: 18px; }
+@media (min-width: 480px) {
+  .btn.fit { width: auto; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="header">
+      <a class="brand" href="#/" aria-label="Tesla Club SA home" id="brand"></a>
+      <nav class="nav">
+        <a href="#/events">Events</a>
+        <a class="ghost" href="#/signin" id="account-link">Sign in</a>
+      </nav>
+    </header>
+    <main id="app"></main>
+    <footer class="footer">
+      <div class="socials">
+        <a href="https://www.instagram.com/teslaclubzar" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.threads.com/@teslaclubzar" target="_blank" rel="noopener">Threads</a>
+        <a href="https://www.facebook.com/share/g/1BYcDfJJfM/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook group</a>
+        <a href="https://www.facebook.com/share/18h9qo3HQd/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://x.com/teslazar" target="_blank" rel="noopener">X</a>
+        <a href="https://x.com/i/communities/1847461342971908211" target="_blank" rel="noopener">X Community</a>
+        <a href="https://chat.whatsapp.com/Hwl2LEwkZxD0NHjTeHtF09?mode=gi_t" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <p class="disclaimer">Independent owners' and fans' club. Not affiliated with or endorsed by Tesla, Inc.</p>
+      <div class="footer-links">
+        <a href="#/privacy">Privacy (POPIA)</a>
+        <a href="mailto:teslaclubzar@gmail.com">teslaclubzar@gmail.com</a>
+        <a href="#/admin">Admin</a>
+      </div>
+    </footer>
+  </div>
+  <script>
+"use strict";
+
+const NOTICE_VERSION = "2026-10-draft-1";
+const SESSION_MS = 90 * 24 * 60 * 60 * 1000;
+const REGIONS = ["City Bowl", "Atlantic Seaboard", "Southern Suburbs", "Northern Suburbs", "Helderberg", "Winelands", "West Coast", "Other Western Cape", "Gauteng", "KZN", "Other"];
+const STATUSES = ["I own one", "On order", "Fan (not yet!)"];
+const MODELS = ["Model 3", "Model Y", "Model S", "Model X", "Cybertruck", "Other", "None yet"];
+const INTERESTS = ["Meetups", "Light shows", "Road trips", "Charity drives", "Launch watch parties"];
+const HEARD = ["Instagram", "Facebook", "X (Twitter)", "TikTok", "WhatsApp", "A friend or member", "Saw us at a meetup", "Google / web search", "Other"];
+
+function seedEvents() {
+  return [
+    {
+      id: "evt-coffee-example",
+      title: "Monthly coffee meetup",
+      start: "2026-11-07T08:30:00+02:00",
+      end: "2026-11-07T10:30:00+02:00",
+      place: "Example venue – to be confirmed",
+      area: "Southern Suburbs (example)",
+      summary: "EXAMPLE – not a real event. This shows what a monthly meetup listing will look like: coffee, walk-arounds and a short club welcome. Owners and fans welcome.",
+      bring: "Your car if you have one (fans very welcome without), a jacket for the Cape wind, and questions for the new-owner corner.",
+      safety: "No convoys, no revving, no launches. Marshals will help with parking; please follow their lead. Spectators stay off the road.",
+      example: true,
+      published: true,
+    },
+    {
+      id: "evt-lightshow-example",
+      title: "Light show evening (we're planning)",
+      start: "2026-11-28T19:30:00+02:00",
+      end: null,
+      place: "Example venue – to be confirmed",
+      area: "Cape Town (example)",
+      summary: "EXAMPLE – not a real event. We're planning a light show using the Light Show feature built into the cars. It's run by the club, not Tesla. Members are welcome to join in. If the wind or rain is bad, or the venue asks us to, we'll move or cancel it and post an update.",
+      bring: "A charged car if you're taking part, a warm layer, and patience while we park everyone.",
+      safety: "No show on public roads or road shoulders. Spectators stay off the road. Volume kept down after the venue curfew. No convoys on the way in or out.",
+      example: true,
+      published: true,
+    },
+  ];
+}
+
+function loadDb() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem("tcsa-db") || "");
+    if (!parsed || !Array.isArray(parsed.events)) throw new Error("empty");
+    return parsed;
+  } catch {
+    return { members: [], sessions: [], events: seedEvents(), rsvps: [], nextMember: 1, adminPassword: "" };
+  }
+}
+function saveDb(db) {
+  localStorage.setItem("tcsa-db", JSON.stringify(db));
+}
+function memberNo(n) {
+  return "TCSA-" + String(n).padStart(4, "0");
+}
+function firstName(name) {
+  return String(name || "").trim().split(/\s+/)[0] || "there";
+}
+function publicMember(m) {
+  return {
+    id: m.id,
+    memberNo: memberNo(m.number),
+    name: m.name,
+    email: m.email,
+    mobile: m.mobile || "",
+    region: m.region,
+    teslaStatus: m.teslaStatus,
+    model: m.model,
+    interests: m.interests || [],
+    heardFrom: m.heardFrom || "",
+    whatsappOptIn: !!m.whatsappOptIn,
+    newsOptIn: !!m.newsOptIn,
+    consentAt: m.consentAt,
+    consentVersion: m.consentVersion,
+    joinedAt: m.joinedAt,
+    firstName: firstName(m.name),
+    lastSignInAt: m.lastSignInAt || null,
+  };
+}
+function sessionMember(db) {
+  const token = localStorage.getItem("tcsa-session");
+  const session = (db.sessions || []).find((s) => s.token === token && s.expiresAt > Date.now());
+  if (!session) return null;
+  return db.members.find((m) => m.id === session.memberId) || null;
+}
+function eventPublic(db, event, member) {
+  const rsvps = db.rsvps.filter((r) => r.eventId === event.id);
+  const mine = member ? rsvps.find((r) => r.memberId === member.id) : null;
+  return {
+    id: event.id,
+    title: event.title,
+    start: event.start,
+    end: event.end || null,
+    place: event.place,
+    area: event.area,
+    summary: event.summary,
+    bring: event.bring,
+    safety: event.safety,
+    example: !!event.example,
+    published: !!event.published,
+    counts: {
+      going: rsvps.filter((r) => r.status === "going").length,
+      maybe: rsvps.filter((r) => r.status === "maybe").length,
+      cant: rsvps.filter((r) => r.status === "cant").length,
+    },
+    rsvp: mine ? mine.status : null,
+  };
+}
+function normaliseMobile(input) {
+  if (input == null || String(input).trim() === "") return "";
+  let raw = String(input).replace(/[\s()-]/g, "");
+  if (raw.startsWith("+")) raw = raw.slice(1);
+  if (raw.startsWith("27") && raw.length === 11) return "+" + raw;
+  if (raw.startsWith("0") && raw.length === 10) return "+27" + raw.slice(1);
+  return null;
+}
+function validEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+function csvCell(value) {
+  let s = value == null ? "" : String(value);
+  if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+  if (/[",\n\r]/.test(s)) s = `"${s.replace(/"/g, '""')}"`;
+  return s;
+}
+
+function handle(path, method, body) {
+  const db = loadDb();
+  const member = sessionMember(db);
+  const admin = localStorage.getItem("tcsa-admin") === "1";
+
+  if (path === "/api/meta") {
+    return { status: 200, body: { regions: REGIONS, statuses: STATUSES, models: MODELS, interests: INTERESTS, heard: HEARD, noticeVersion: NOTICE_VERSION } };
+  }
+  if (path === "/api/me" && method === "GET") {
+    return { status: 200, body: { member: member ? publicMember(member) : null } };
+  }
+  if (path === "/api/join" && method === "POST") {
+    if (body.ageConfirmed !== true) return { status: 400, body: { error: "You need to confirm you are 18 or older." } };
+    if (body.consent !== true) return { status: 400, body: { error: "Please agree to the club using your details to run the club." } };
+    const name = String(body.name || "").trim().replace(/\s+/g, " ");
+    const email = String(body.email || "").trim().toLowerCase();
+    const mobile = normaliseMobile(body.mobile);
+    if (name.length < 2) return { status: 400, body: { error: "Please add your name." } };
+    if (!validEmail(email)) return { status: 400, body: { error: "That email doesn't look right." } };
+    if (mobile === null) return { status: 400, body: { error: "Use a South African mobile, or leave it blank." } };
+    if (!REGIONS.includes(body.region)) return { status: 400, body: { error: "Choose a region." } };
+    if (!STATUSES.includes(body.teslaStatus)) return { status: 400, body: { error: "Choose your Tesla status." } };
+    if (!MODELS.includes(body.model)) return { status: 400, body: { error: "Choose a model." } };
+    if (body.heardFrom && !HEARD.includes(body.heardFrom)) return { status: 400, body: { error: "Choose how you heard about us, or leave it blank." } };
+    if (db.members.some((m) => m.email === email)) return { status: 409, body: { error: "That email is already a member. Sign in instead." } };
+    const created = {
+      id: crypto.randomUUID(),
+      number: db.nextMember++,
+      name,
+      email,
+      mobile,
+      region: body.region,
+      teslaStatus: body.teslaStatus,
+      model: body.model,
+      interests: Array.isArray(body.interests) ? body.interests.filter((i) => INTERESTS.includes(i)) : [],
+      heardFrom: body.heardFrom || "",
+      whatsappOptIn: body.whatsappOptIn === true,
+      newsOptIn: body.newsOptIn === true,
+      consentAt: new Date().toISOString(),
+      consentVersion: NOTICE_VERSION,
+      joinedAt: new Date().toISOString(),
+      lastSignInAt: new Date().toISOString(),
+    };
+    db.members.push(created);
+    const token = crypto.randomUUID();
+    db.sessions.push({ token, memberId: created.id, expiresAt: Date.now() + SESSION_MS });
+    saveDb(db);
+    localStorage.setItem("tcsa-session", token);
+    return { status: 200, body: { member: publicMember(created) } };
+  }
+  if (path === "/api/me" && method === "PATCH") {
+    if (!member) return { status: 401, body: { error: "Sign in first." } };
+    const name = String(body.name || "").trim().replace(/\s+/g, " ");
+    const email = String(body.email || "").trim().toLowerCase();
+    const mobile = normaliseMobile(body.mobile);
+    if (name.length < 2) return { status: 400, body: { error: "Please add your name." } };
+    if (!validEmail(email)) return { status: 400, body: { error: "That email doesn't look right." } };
+    if (mobile === null) return { status: 400, body: { error: "Use a South African mobile, or leave it blank." } };
+    if (!REGIONS.includes(body.region) || !STATUSES.includes(body.teslaStatus) || !MODELS.includes(body.model)) {
+      return { status: 400, body: { error: "Choose a region, status and model." } };
+    }
+    if (db.members.some((m) => m.email === email && m.id !== member.id)) return { status: 409, body: { error: "That email is already a member." } };
+    Object.assign(member, {
+      name,
+      email,
+      mobile,
+      region: body.region,
+      teslaStatus: body.teslaStatus,
+      model: body.model,
+      interests: Array.isArray(body.interests) ? body.interests.filter((i) => INTERESTS.includes(i)) : [],
+      heardFrom: body.heardFrom || "",
+      whatsappOptIn: body.whatsappOptIn === true,
+      newsOptIn: body.newsOptIn === true,
+    });
+    saveDb(db);
+    return { status: 200, body: { member: publicMember(member) } };
+  }
+  if (path === "/api/me" && method === "DELETE") {
+    if (!member) return { status: 401, body: { error: "Sign in first." } };
+    if (String(body.confirm || "") !== "DELETE") return { status: 400, body: { error: "Type DELETE to confirm." } };
+    db.members = db.members.filter((m) => m.id !== member.id);
+    db.rsvps = db.rsvps.filter((r) => r.memberId !== member.id);
+    db.sessions = db.sessions.filter((s) => s.memberId !== member.id);
+    saveDb(db);
+    localStorage.removeItem("tcsa-session");
+    return { status: 200, body: { ok: true } };
+  }
+  if (path === "/api/auth/request" && method === "POST") {
+    const email = String(body.email || "").trim().toLowerCase();
+    const message = `If ${email || "that email"} is a member, a sign-in link is on its way. It expires in 20 minutes.`;
+    const found = db.members.find((m) => m.email === email);
+    if (found) {
+      const token = crypto.randomUUID();
+      db.sessions = db.sessions.filter((s) => s.memberId !== found.id);
+      db.sessions.push({ token, memberId: found.id, expiresAt: Date.now() + SESSION_MS });
+      found.lastSignInAt = new Date().toISOString();
+      saveDb(db);
+      localStorage.setItem("tcsa-session", token);
+    }
+    return { status: 200, body: { message } };
+  }
+  if (path === "/api/auth/logout" && method === "POST") {
+    const token = localStorage.getItem("tcsa-session");
+    db.sessions = db.sessions.filter((s) => s.token !== token);
+    saveDb(db);
+    localStorage.removeItem("tcsa-session");
+    return { status: 200, body: { ok: true } };
+  }
+  if (path === "/api/events" && method === "GET") {
+    const events = db.events.filter((e) => e.published).sort((a, b) => new Date(a.start) - new Date(b.start)).map((e) => eventPublic(db, e, member));
+    return { status: 200, body: { events } };
+  }
+  const eventMatch = path.match(/^\/api\/events\/([^/]+)$/);
+  if (eventMatch && method === "GET") {
+    const event = db.events.find((e) => e.id === decodeURIComponent(eventMatch[1]) && e.published);
+    if (!event) return { status: 404, body: { error: "Event not found." } };
+    return { status: 200, body: { event: eventPublic(db, event, member) } };
+  }
+  const rsvpMatch = path.match(/^\/api\/events\/([^/]+)\/rsvp$/);
+  if (rsvpMatch && method === "POST") {
+    if (!member) return { status: 401, body: { error: "Join the club to RSVP." } };
+    const event = db.events.find((e) => e.id === decodeURIComponent(rsvpMatch[1]) && e.published);
+    if (!event) return { status: 404, body: { error: "Event not found." } };
+    if (!["going", "maybe", "cant"].includes(body.status)) return { status: 400, body: { error: "Choose Going, Maybe or Can't." } };
+    const existing = db.rsvps.find((r) => r.eventId === event.id && r.memberId === member.id);
+    if (existing) existing.status = body.status;
+    else db.rsvps.push({ memberId: member.id, eventId: event.id, status: body.status, updatedAt: new Date().toISOString() });
+    saveDb(db);
+    return { status: 200, body: { event: eventPublic(db, event, member) } };
+  }
+  if (path === "/api/admin/login" && method === "POST") {
+    const password = String(body.password || "");
+    if (!db.adminPassword) {
+      if (password.length < 6) return { status: 400, body: { error: "Choose a password of at least 6 characters. This sets the organiser password on this phone." } };
+      db.adminPassword = password;
+      saveDb(db);
+      localStorage.setItem("tcsa-admin", "1");
+      return { status: 200, body: { ok: true } };
+    }
+    if (password !== db.adminPassword) return { status: 401, body: { error: "That password isn't right." } };
+    localStorage.setItem("tcsa-admin", "1");
+    return { status: 200, body: { ok: true } };
+  }
+  if (path === "/api/admin/logout" && method === "POST") {
+    localStorage.removeItem("tcsa-admin");
+    return { status: 200, body: { ok: true } };
+  }
+  if (path === "/api/admin/session") return { status: 200, body: { ok: admin } };
+  if (path.startsWith("/api/admin/") && !admin) return { status: 401, body: { error: "Admin sign-in required." } };
+  if (path.startsWith("/api/admin/members") && method === "GET") {
+    const q = new URL(path, location.origin).searchParams;
+    const query = String(q.get("q") || "").toLowerCase();
+    const shown = db.members.filter((m) => {
+      if (query && !`${m.name} ${m.email}`.toLowerCase().includes(query)) return false;
+      if (q.get("region") && m.region !== q.get("region")) return false;
+      if (q.get("model") && m.model !== q.get("model")) return false;
+      if (q.get("status") && m.teslaStatus !== q.get("status")) return false;
+      if (q.get("interest") && !(m.interests || []).includes(q.get("interest"))) return false;
+      return true;
+    });
+    return { status: 200, body: { total: db.members.length, shown: shown.length, members: shown.sort((a, b) => a.number - b.number).map(publicMember) } };
+  }
+  const delMember = path.match(/^\/api\/admin\/members\/([^/]+)$/);
+  if (delMember && method === "DELETE") {
+    const id = decodeURIComponent(delMember[1]);
+    db.members = db.members.filter((m) => m.id !== id);
+    db.rsvps = db.rsvps.filter((r) => r.memberId !== id);
+    db.sessions = db.sessions.filter((s) => s.memberId !== id);
+    saveDb(db);
+    return { status: 200, body: { ok: true } };
+  }
+  if (path.startsWith("/api/admin/export")) {
+    const q = new URL(path, location.origin).searchParams;
+    const query = String(q.get("q") || "").toLowerCase();
+    const rows = db.members.filter((m) => !query || `${m.name} ${m.email}`.toLowerCase().includes(query));
+    const header = ["Member no", "Name", "Email", "Mobile", "Region", "Tesla status", "Model", "Interests", "Heard from", "WhatsApp opt-in", "News opt-in", "Consent at", "Joined"];
+    const lines = [header.map(csvCell).join(",")];
+    rows.sort((a, b) => a.number - b.number).forEach((m) => {
+      lines.push([memberNo(m.number), m.name, m.email, m.mobile || "", m.region, m.teslaStatus, m.model, (m.interests || []).join("; "), m.heardFrom || "", m.whatsappOptIn ? "yes" : "no", m.newsOptIn ? "yes" : "no", m.consentAt, m.joinedAt].map(csvCell).join(","));
+    });
+    return { status: 200, body: "\uFEFF" + lines.join("\r\n"), csv: true };
+  }
+  if (path === "/api/admin/events" && method === "GET") {
+    return { status: 200, body: { events: db.events.slice().sort((a, b) => new Date(a.start) - new Date(b.start)).map((e) => eventPublic(db, e, null)) } };
+  }
+  if (path === "/api/admin/events" && method === "POST") {
+    if (!body.title || !body.start || !body.place || !body.area || !body.summary) return { status: 400, body: { error: "Title, start, place, area and summary are required." } };
+    const event = { id: crypto.randomUUID(), title: body.title, start: body.start, end: body.end || null, place: body.place, area: body.area, summary: body.summary, bring: body.bring || "", safety: body.safety || "", example: body.example === true, published: body.published === true };
+    db.events.push(event);
+    saveDb(db);
+    return { status: 200, body: { event: eventPublic(db, event, null) } };
+  }
+  const editEvent = path.match(/^\/api\/admin\/events\/([^/]+)$/);
+  if (editEvent && method === "PATCH") {
+    const event = db.events.find((e) => e.id === decodeURIComponent(editEvent[1]));
+    if (!event) return { status: 404, body: { error: "Event not found." } };
+    Object.assign(event, { title: body.title, start: body.start, end: body.end || null, place: body.place, area: body.area, summary: body.summary, bring: body.bring || "", safety: body.safety || "", example: body.example === true, published: body.published === true });
+    saveDb(db);
+    return { status: 200, body: { event: eventPublic(db, event, null) } };
+  }
+  if (editEvent && method === "DELETE") {
+    const id = decodeURIComponent(editEvent[1]);
+    db.events = db.events.filter((e) => e.id !== id);
+    db.rsvps = db.rsvps.filter((r) => r.eventId !== id);
+    saveDb(db);
+    return { status: 200, body: { ok: true } };
+  }
+  if (path === "/api/admin/outbox") {
+    return { status: 200, body: { mailConfigured: false, links: [] } };
+  }
+  return { status: 404, body: { error: "Not found." } };
+}
+
+const nativeFetch = window.fetch.bind(window);
+document.addEventListener("click", (event) => {
+  const link = event.target.closest("a");
+  if (!link) return;
+  const href = link.getAttribute("href") || "";
+  if (!href.startsWith("/api/admin/export")) return;
+  event.preventDefault();
+  const routed = handle(href, "GET", {});
+  const blob = new Blob([routed.body], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "tesla-club-sa-members.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+});
+window.fetch = async function (input, opts) {
+  const url = typeof input === "string" ? input : input.url;
+  let path = url;
+  try { path = new URL(url, location.origin).pathname + new URL(url, location.origin).search; } catch { /* keep */ }
+  if (!path.startsWith("/api/")) return nativeFetch(input, opts);
+  const method = ((opts && opts.method) || "GET").toUpperCase();
+  let body = {};
+  if (opts && opts.body) {
+    try { body = JSON.parse(opts.body); } catch { body = {}; }
+  }
+  const routed = handle(path, method, body);
+  if (routed.csv) {
+    return new Response(routed.body, { status: 200, headers: { "Content-Type": "text/csv; charset=utf-8" } });
+  }
+  return new Response(JSON.stringify(routed.body), {
+    status: routed.status,
+    headers: { "Content-Type": "application/json" },
+  });
+};
+
+  </script>
+  <script>
+"use strict";
+
+const WA = "https://chat.whatsapp.com/Hwl2LEwkZxD0NHjTeHtF09?mode=gi_t";
+const LOGO = `<svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+  <rect width="64" height="64" rx="14" fill="#12161C"/>
+  <path d="M7.5 46 L11.4 41.2 L14.6 33.6 L17.8 24.4 L20.8 32.6 L23.8 27.2 L24.2 22.6 H39.4 L39.8 27.4 L42.8 34.6 L45.6 29.4 C47.6 25.2 49.8 22.4 52.2 23.2 C54.8 24.1 56.2 28.2 57 34.4 L58.4 41.2 L56.6 46" fill="none" stroke="#EEF1F5" stroke-width="1.85" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M10 51.6 H54" stroke="#E31937" stroke-width="1.9" stroke-linecap="round"/>
+  <path d="M31.4 16.2 L34.6 9.8 L33 13.2 L38 6.2" fill="none" stroke="#E31937" stroke-width="1.65" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="38.8" cy="5.1" r="1.25" fill="#E31937"/>
+</svg>`;
+
+const app = document.getElementById("app");
+document.getElementById("brand").innerHTML = LOGO;
+let me = null;
+let meta = null;
+let deferredPrompt = null;
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, (c) => {
+    if (c === "&") return "\u0026amp;";
+    if (c === "<") return "\u003c";
+    if (c === ">") return "\u003e";
+    if (c === '"') return "\u0026quot;";
+    return "\u0026#39;";
+  });
+}
+function go(path) {
+  const next = path.startsWith("#") ? path : "#" + (path === "/" ? "/" : path);
+  if (location.hash !== next) location.hash = next;
+  else render();
+}
+function path() {
+  const raw = (location.hash || "#/").slice(1) || "/";
+  return raw.split("?")[0] || "/";
+}
+window.addEventListener("hashchange", render);
+async function api(url, opts = {}) {
+  const res = await fetch(url, {
+    headers: { "Content-Type": "application/json", ...(opts.headers || {}) },
+    credentials: "same-origin",
+    ...opts,
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  const text = await res.text();
+  let data = {};
+  try { data = text ? JSON.parse(text) : {}; } catch { data = { error: text }; }
+  if (!res.ok) throw new Error(data.error || "Something went wrong.");
+  return data;
+}
+function monthYear(iso) {
+  return new Intl.DateTimeFormat("en-ZA", { month: "long", year: "numeric", timeZone: "Africa/Johannesburg" }).format(new Date(iso));
+}
+function dateParts(iso) {
+  const d = new Date(iso);
+  const day = new Intl.DateTimeFormat("en-ZA", { day: "2-digit", timeZone: "Africa/Johannesburg" }).format(d);
+  const mon = new Intl.DateTimeFormat("en-ZA", { month: "short", timeZone: "Africa/Johannesburg" }).format(d).replace(".", "").slice(0, 3).toUpperCase();
+  return { day, mon };
+}
+function clock(iso) {
+  return new Intl.DateTimeFormat("en-ZA", { hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: "Africa/Johannesburg" }).format(new Date(iso));
+}
+function when(event) {
+  const start = clock(event.start);
+  return event.end ? `${start}–${clock(event.end)} SAST` : `${start} SAST`;
+}
+function tile(iso) {
+  const p = dateParts(iso);
+  return `<div class="date-tile" aria-hidden="true"><b>${esc(p.day)}</b><i>/</i><span>${esc(p.mon)}</span></div>`;
+}
+function badge(event) {
+  return event.example ? `<div class="badge">EXAMPLE – not a real event</div>` : "";
+}
+function setAccount() {
+  const link = document.getElementById("account-link");
+  if (me) {
+    link.textContent = "My club";
+    link.href = "/home";
+  } else {
+    link.textContent = "Sign in";
+    link.href = "/signin";
+  }
+}
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+document.body.addEventListener("click", (e) => {
+  const a = e.target.closest("a");
+  if (!a) return;
+  const href = a.getAttribute("href");
+  if (!href || href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("/api/") || a.target === "_blank" || a.hasAttribute("download")) return;
+  e.preventDefault();
+  go(href);
+});
+window.addEventListener("popstate", render);
+
+function installHint() {
+  if (localStorage.getItem("tcsa-install-hide") === "1") return "";
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const canPrompt = !ios && !!deferredPrompt;
+  return `<div class="install" id="install-hint">
+    <strong>Add the club to your home screen</strong>
+    <p class="hint">${ios ? "In Safari, tap Share, then 'Add to Home Screen'" : "Add Tesla Club SA so meetups are a tap away."}</p>
+    <div class="row">
+      ${canPrompt ? `<button class="btn btn-primary fit" id="install-btn" type="button">Add to home screen</button>` : ""}
+      <button class="btn btn-secondary fit" id="install-dismiss" type="button">Not now</button>
+    </div>
+  </div>`;
+}
+
+function rsvpButtons(event) {
+  if (!me) {
+    return `<div class="stack">
+      <a class="btn btn-primary" href="/join">Join the club to RSVP</a>
+      <a class="btn btn-secondary" href="/signin">I'm a member, sign in</a>
+    </div>`;
+  }
+  const current = event.rsvp;
+  const btn = (status, label) => `<button class="btn ${current === status ? "btn-primary" : "btn-secondary"}" data-rsvp="${status}" data-event="${esc(event.id)}" type="button">${label}</button>`;
+  return `<div class="stack">${btn("going", "Going")}${btn("maybe", "Maybe")}${btn("cant", "Can't")}</div>`;
+}
+
+async function render() {
+  setAccount();
+  const p = path();
+  if (p === "/home" && !me) return go("/signin");
+  if (p === "/profile" && !me) return go("/signin");
+  if (p === "/delete" && !me) return go("/signin");
+  try {
+    if (p === "/") return renderLanding();
+    if (p === "/join") return renderJoin();
+    if (p === "/signin") return renderSignin();
+    if (p === "/home") return renderHome();
+    if (p === "/events") return renderEvents();
+    if (p.startsWith("/events/")) return renderEvent(p.split("/")[2]);
+    if (p === "/privacy") return renderPrivacy();
+    if (p === "/profile") return renderProfile();
+    if (p === "/delete") return renderDelete();
+    if (p === "/admin") return renderAdmin();
+    app.innerHTML = `<div class="card"><h1>Not found</h1><p>That page isn't on the club app.</p><a class="btn btn-secondary" href="/">Back home</a></div>`;
+  } catch (err) {
+    app.innerHTML = `<div class="card"><p class="error">${esc(err.message)}</p></div>`;
+  }
+}
+
+async function renderLanding() {
+  const deleted = new URLSearchParams(location.search).get("deleted") === "1";
+  if (deleted) history.replaceState({}, "", "/");
+  const { events } = await api("/api/events");
+  const upcoming = events.slice(0, 2);
+  app.innerHTML = `
+    ${deleted ? `<div class="card" style="margin-bottom:14px"><p>Done. Your details have been deleted. Sorry to see you go, and you're welcome back anytime.</p></div>` : ""}
+    <p class="eyebrow">Cape Town · South Africa</p>
+    <div class="hero-mark">${LOGO}</div>
+    <h1>TESLA CLUB <span class="glow">SA</span></h1>
+    <p class="lede">A community-run club for Tesla owners and fans. We get together, go for proper drives on great Cape roads, and keep it friendly and well organised. Light shows are in the works.</p>
+    <div class="stack">
+      <a class="btn btn-primary" href="/join">Join the club</a>
+      <a class="btn btn-secondary" href="/signin">Already a member? Sign in</a>
+    </div>
+    <p class="fine">Free to join · takes about a minute</p>
+    <div class="cards" style="margin-top:22px">
+      <article class="card"><h3>Meetups</h3><p>A relaxed monthly get-together. Coffee, walk-arounds, swapping notes on charging, software and road trips.</p></article>
+      <article class="card"><h3>Scenic drives</h3><p>Organised, sensible drives on some of the best roads in the Cape. No convoys hogging the road, no racing.</p></article>
+      <article class="card"><h3>Light shows</h3><p>In the works. We're planning them properly with the right venue, permission and neighbours in mind.</p></article>
+      <article class="card"><h3>Everyone welcome</h3><p>Own one, waiting on delivery, or just keen? You're in. No car required to join.</p></article>
+    </div>
+    <h2 style="margin-top:28px">Coming up</h2>
+    <div class="cards">
+      ${upcoming.length ? upcoming.map(eventCard).join("") : `<article class="card"><p>The next meetup date is being locked in. We'll let you know.</p></article>`}
+    </div>
+    <h2 style="margin-top:28px">How we roll</h2>
+    <div class="card"><ul class="rules">
+      <li>Respect the neighbours, the venue and the road.</li>
+      <li>No convoys, no revving, no 'launches'.</li>
+      <li>Spectators stay off the road. Always.</li>
+    </ul></div>
+  `;
+}
+function eventCard(event) {
+  return `<a class="card" href="/events/${esc(event.id)}">
+    ${badge(event)}
+    <div class="event-row">${tile(event.start)}
+      <div><h3>${esc(event.title)}</h3><p>${esc(when(event))}</p><p>${esc(event.place)} · ${esc(event.area)}</p></div>
+    </div>
+  </a>`;
+}
+
+function renderJoin() {
+  const draft = { step: 1, interests: [], whatsappOptIn: false, newsOptIn: false, consent: false };
+  const paint = () => {
+    const pct = (draft.step / 5) * 100;
+    app.innerHTML = `
+      <p class="eyebrow">Join the club · step ${draft.step} of 5</p>
+      <div class="progress" aria-hidden="true"><span style="width:${pct}%"></span></div>
+      <div id="step"></div>`;
+    const step = document.getElementById("step");
+    if (draft.step === 1) {
+      step.innerHTML = `<h1>Quick one first. Are you 18 or older?</h1>
+        <div class="stack">
+          <button class="btn btn-primary" id="yes18" type="button">Yes, I'm 18+</button>
+          <button class="btn btn-secondary" id="no18" type="button">No, I'm under 18</button>
+        </div>
+        <div id="under"></div>`;
+      step.querySelector("#yes18").onclick = () => { draft.ageConfirmed = true; draft.step = 2; paint(); };
+      step.querySelector("#no18").onclick = () => {
+        draft.ageConfirmed = false;
+        step.querySelector("#under").innerHTML = `<div class="card" style="margin-top:14px"><p>Thanks for your interest! Under-18s are very welcome at the club, but we need a parent or guardian to get in touch with us first. Ask them to email teslaclubzar@gmail.com. We haven't saved any of your details.</p></div>`;
+      };
+      return;
+    }
+    if (draft.step === 2) {
+      step.innerHTML = `<h1>Howzit! Who are you?</h1>
+        <label for="name">Name</label><input id="name" value="${esc(draft.name || "")}" required />
+        <label for="email">Email</label><input id="email" type="email" autocomplete="email" value="${esc(draft.email || "")}" required />
+        <p class="hint">We'll use this to sign you in. No passwords.</p>
+        <label for="mobile">Mobile</label><input id="mobile" inputmode="tel" placeholder="082 000 0000" value="${esc(draft.mobile || "")}" />
+        <p class="hint">Optional. South African numbers only, saved as +27…</p>
+        ${err(draft.error)}
+        <div class="stack" style="margin-top:16px"><button class="btn btn-primary" id="next" type="button">Next</button><button class="btn btn-secondary" id="back" type="button">Back</button></div>`;
+      step.querySelector("#back").onclick = () => { draft.step = 1; paint(); };
+      step.querySelector("#next").onclick = () => {
+        draft.name = step.querySelector("#name").value.trim();
+        draft.email = step.querySelector("#email").value.trim().toLowerCase();
+        draft.mobile = step.querySelector("#mobile").value.trim();
+        if (draft.name.length < 2) return fail("Please add your name.");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(draft.email)) return fail("That email doesn't look right.");
+        draft.error = "";
+        draft.step = 3;
+        paint();
+      };
+    }
+    if (draft.step === 3) {
+      step.innerHTML = `<h1>Where & what you drive</h1>
+        <label for="region">Region</label>${select("region", meta.regions, draft.region)}
+        <label for="status">Tesla status</label>${select("status", meta.statuses, draft.teslaStatus)}
+        <label for="model">Model</label>${select("model", meta.models, draft.model)}
+        ${err(draft.error)}
+        <div class="stack" style="margin-top:16px"><button class="btn btn-primary" id="next" type="button">Next</button><button class="btn btn-secondary" id="back" type="button">Back</button></div>`;
+      const status = step.querySelector("#status");
+      const model = step.querySelector("#model");
+      status.onchange = () => { if (status.value === "Fan (not yet!)") model.value = "None yet"; };
+      step.querySelector("#back").onclick = () => { draft.step = 2; paint(); };
+      step.querySelector("#next").onclick = () => {
+        draft.region = step.querySelector("#region").value;
+        draft.teslaStatus = status.value;
+        draft.model = model.value;
+        if (!draft.region || !draft.teslaStatus || !draft.model) return fail("Choose a region, status and model.");
+        draft.error = "";
+        draft.step = 4;
+        paint();
+      };
+    }
+    if (draft.step === 4) {
+      step.innerHTML = `<h1>What are you keen on?</h1>
+        <div class="chips" id="interests">${meta.interests.map((i) => `<button type="button" class="chip ${draft.interests.includes(i) ? "on" : ""}" data-i="${esc(i)}">${esc(i)}</button>`).join("")}</div>
+        <label for="heard">How did you hear about us?</label>
+        <select id="heard"><option value="">Optional</option>${meta.heard.map((h) => `<option ${draft.heardFrom === h ? "selected" : ""}>${esc(h)}</option>`).join("")}</select>
+        <div class="stack" style="margin-top:16px"><button class="btn btn-primary" id="next" type="button">Next</button><button class="btn btn-secondary" id="back" type="button">Back</button></div>`;
+      step.querySelectorAll(".chip").forEach((chip) => chip.onclick = () => {
+        const name = chip.dataset.i;
+        draft.interests = draft.interests.includes(name) ? draft.interests.filter((i) => i !== name) : draft.interests.concat(name);
+        chip.classList.toggle("on");
+      });
+      step.querySelector("#back").onclick = () => { draft.step = 3; paint(); };
+      step.querySelector("#next").onclick = () => { draft.heardFrom = step.querySelector("#heard").value; draft.step = 5; paint(); };
+    }
+    if (draft.step === 5) {
+      step.innerHTML = `<h1>Last bit: your privacy</h1>
+        <div class="card"><p>We use your details only to run the club: event invites and club updates. We don't sell or share your data. Ask us to update or delete your info anytime: teslaclubzar@gmail.com. <a href="/privacy" target="_blank" rel="noopener">Full notice</a>.</p></div>
+        <label class="check"><input type="checkbox" id="consent" ${draft.consent ? "checked" : ""}/> <span>I agree that Tesla Club SA may use my details to run the club, as described above.</span></label>
+        <label class="check"><input type="checkbox" id="wa" ${draft.whatsappOptIn ? "checked" : ""}/> <span>Yes, I'd like to be in the club WhatsApp group.</span></label>
+        <label class="check"><input type="checkbox" id="news" ${draft.newsOptIn ? "checked" : ""}/> <span>Send me club news by email (event announcements, a few times a month at most).</span></label>
+        ${err(draft.error)}
+        <div class="stack" style="margin-top:16px"><button class="btn btn-primary" id="next" type="button">Join the club</button><button class="btn btn-secondary" id="back" type="button">Back</button></div>`;
+      step.querySelector("#back").onclick = () => { draft.step = 4; paint(); };
+      step.querySelector("#next").onclick = async () => {
+        draft.consent = step.querySelector("#consent").checked;
+        draft.whatsappOptIn = step.querySelector("#wa").checked;
+        draft.newsOptIn = step.querySelector("#news").checked;
+        if (!draft.consent) return fail("Please tick the agreement to join.");
+        try {
+          const data = await api("/api/join", { method: "POST", body: { ...draft, ageConfirmed: true } });
+          me = data.member;
+          sessionStorage.setItem("tcsa-welcome", "1");
+          setAccount();
+          go("/home");
+        } catch (e) { fail(e.message); }
+      };
+    }
+    function fail(message) { draft.error = message; paint(); }
+  };
+  paint();
+}
+function select(id, options, value) {
+  return `<select id="${id}"><option value="">Choose</option>${options.map((o) => `<option ${value === o ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
+}
+function err(message) { return message ? `<p class="error">${esc(message)}</p>` : ""; }
+
+function renderSignin() {
+  const expired = new URLSearchParams(location.search).get("error") === "expired";
+  app.innerHTML = `<p class="eyebrow">Members</p><h1>Sign in</h1>
+    <p class="lede">A one-time email link. No password.</p>
+    ${expired ? `<p class="error">That sign-in link has expired or already been used. Request a new one.</p>` : ""}
+    <label for="email">Email</label><input id="email" type="email" autocomplete="email" />
+    <div class="stack" style="margin-top:16px"><button class="btn btn-primary" id="send" type="button">Email me a sign-in link</button></div>
+    <p id="msg" class="fine"></p>
+    <p class="fine">New here? <a href="/join">Join the club</a></p>`;
+  document.getElementById("send").onclick = async () => {
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const data = await api("/api/auth/request", { method: "POST", body: { email } });
+    document.getElementById("msg").textContent = data.message;
+  };
+}
+
+async function renderHome() {
+  const { events } = await api("/api/events");
+  const next = events[0];
+  const welcome = sessionStorage.getItem("tcsa-welcome") === "1";
+  sessionStorage.removeItem("tcsa-welcome");
+  app.innerHTML = `
+    <p class="eyebrow">Tesla Club SA</p>
+    <h1>${welcome ? `Welcome to the club, ${esc(me.firstName)}!` : `Howzit, ${esc(me.firstName)}`}</h1>
+    <div class="member-card">
+      <div class="lockup">
+        ${LOGO}
+        <div><div class="kicker">TESLA CLUB SA · MEMBER</div><div class="no">${esc(me.memberNo)}</div></div>
+      </div>
+      <div class="who">${esc(me.name)}</div>
+      <p class="muted" style="margin:0">${esc(me.region)} · ${esc(me.model)}</p>
+      <p class="fine">Member since ${esc(monthYear(me.joinedAt))}</p>
+    </div>
+    <h2 style="margin-top:26px">Next up</h2>
+    ${next ? `<div class="card">${badge(next)}<div class="event-row">${tile(next.start)}<div><h3>${esc(next.title)}</h3><p>${esc(when(next))} · ${esc(next.place)}</p></div></div>
+      <div style="margin-top:12px">${rsvpButtons(next)}</div>
+      <p style="margin-top:12px"><a href="/events/${esc(next.id)}">Details & what to bring →</a></p></div>` : `<div class="card"><p>The next meetup date is being locked in. We'll let you know.</p></div>`}
+    <div class="stack" style="margin-top:16px">
+      <a class="btn btn-wa" href="${WA}" target="_blank" rel="noopener">Join our WhatsApp group</a>
+    </div>
+    <div class="socials" style="margin-top:14px">
+      <a href="https://www.instagram.com/teslaclubzar" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.threads.com/@teslaclubzar" target="_blank" rel="noopener">Threads</a>
+      <a href="https://www.facebook.com/share/g/1BYcDfJJfM/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook group</a>
+      <a href="https://x.com/teslazar" target="_blank" rel="noopener">X</a>
+      <a href="https://x.com/i/communities/1847461342971908211" target="_blank" rel="noopener">X Community</a>
+    </div>
+    <div style="margin-top:14px">${installHint()}</div>
+    <div class="stack" style="margin-top:18px">
+      <a class="btn btn-secondary" href="/events">All events</a>
+      <a class="btn btn-secondary" href="/profile">Edit my profile</a>
+      <a class="btn btn-secondary" href="/delete">Delete my data</a>
+      <button class="btn btn-secondary" id="out" type="button">Sign out</button>
+    </div>`;
+  const install = document.getElementById("install-btn");
+  if (install) install.onclick = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  };
+  const dismiss = document.getElementById("install-dismiss");
+  if (dismiss) dismiss.onclick = () => { localStorage.setItem("tcsa-install-hide", "1"); dismiss.closest(".install").remove(); };
+  document.getElementById("out").onclick = async () => { await api("/api/auth/logout", { method: "POST", body: {} }); me = null; setAccount(); go("/"); };
+  bindRsvp();
+}
+
+async function renderEvents() {
+  const { events } = await api("/api/events");
+  app.innerHTML = `<p class="eyebrow">Calendar</p><h1>Events</h1>
+    <p class="lede">Meetups, drives and more. Times are South African time.</p>
+    <div class="cards">${events.map(eventCard).join("") || `<article class="card"><p>The next meetup date is being locked in. We'll let you know.</p></article>`}</div>`;
+}
+
+async function renderEvent(id) {
+  const { event } = await api("/api/events/" + id);
+  app.innerHTML = `<p class="eyebrow">${esc(event.area)}</p>
+    ${badge(event)}
+    <div class="event-row">${tile(event.start)}<h1 style="margin:0">${esc(event.title)}</h1></div>
+    <p class="lede" style="margin-top:14px">${esc(event.summary)}</p>
+    <div class="card">
+      <p><strong>Date.</strong> ${esc(dateParts(event.start).day)} ${esc(dateParts(event.start).mon)} · ${esc(when(event))}</p>
+      <p><strong>Place.</strong> ${esc(event.place)}</p>
+      <p><strong>Area.</strong> ${esc(event.area)}</p>
+      <p><strong>What to bring.</strong> ${esc(event.bring)}</p>
+    </div>
+    <div class="amber"><h3>What not to expect</h3><p>${esc(event.safety)}</p></div>
+    <h2>Are you coming?</h2>
+    <div id="rsvp">${rsvpButtons(event)}</div>`;
+  bindRsvp();
+}
+function bindRsvp() {
+  document.querySelectorAll("[data-rsvp]").forEach((btn) => btn.onclick = async () => {
+    const data = await api(`/api/events/${btn.dataset.event}/rsvp`, { method: "POST", body: { status: btn.dataset.rsvp } });
+    const box = document.getElementById("rsvp") || btn.closest(".card");
+    if (document.getElementById("rsvp")) document.getElementById("rsvp").innerHTML = rsvpButtons(data.event);
+    else btn.closest(".card").querySelector(".stack").outerHTML = rsvpButtons(data.event);
+    bindRsvp();
+  });
+}
+
+function renderPrivacy() {
+  app.innerHTML = `<div class="draft">DRAFT – for Roy to review before launch</div>
+    <h1>Privacy</h1>
+    <p class="lede">Plain-language notice, written for POPIA.</p>
+    <article class="card"><h3>Who we are</h3><p>Tesla Club SA, an independent club, not affiliated with Tesla, Inc. Contact: teslaclubzar@gmail.com.</p></article>
+    <article class="card" style="margin-top:12px"><h3>What we collect</h3><p>the join fields, RSVPs, opt-in choices, consent date and last sign-in.</p></article>
+    <article class="card" style="margin-top:12px"><h3>Why</h3><p>only to run the club: event invites, organising meetups (e.g. knowing roughly how many people are coming), and updates if you asked for them.</p></article>
+    <article class="card" style="margin-top:12px"><h3>Who sees it</h3><p>organisers only. We never sell or share your details with sponsors, partners or anyone else. A hosting provider stores the data for us. WhatsApp group members can see your name and number.</p></article>
+    <article class="card" style="margin-top:12px"><h3>Your rights</h3><p>update or delete your details in the app, or email us to access, correct or delete them. Opt out of news anytime. You can complain to the Information Regulator (South Africa).</p></article>
+    <article class="card" style="margin-top:12px"><h3>Under 18s</h3><p>18+ only. A parent or guardian contacts us first. We keep nothing that under-18s enter.</p></article>
+    <article class="card" style="margin-top:12px"><h3>Retention</h3><p>while you're a member.</p></article>
+    <article class="card" style="margin-top:12px"><h3>Security</h3><p>One-time sign-in links, no passwords, and only organisers see the member list.</p></article>`;
+}
+
+function profileForm(member, action) {
+  return `<label for="name">Name</label><input id="name" value="${esc(member.name)}" />
+    <label for="email">Email</label><input id="email" type="email" value="${esc(member.email)}" />
+    <p class="hint">We'll use this to sign you in. No passwords.</p>
+    <label for="mobile">Mobile</label><input id="mobile" value="${esc(member.mobile || "")}" />
+    <label for="region">Region</label>${select("region", meta.regions, member.region)}
+    <label for="status">Tesla status</label>${select("status", meta.statuses, member.teslaStatus)}
+    <label for="model">Model</label>${select("model", meta.models, member.model)}
+    <p style="margin-top:14px">What are you keen on?</p>
+    <div class="chips">${meta.interests.map((i) => `<button type="button" class="chip ${(member.interests || []).includes(i) ? "on" : ""}" data-i="${esc(i)}">${esc(i)}</button>`).join("")}</div>
+    <label for="heard">How did you hear about us?</label>
+    <select id="heard"><option value="">Optional</option>${meta.heard.map((h) => `<option ${member.heardFrom === h ? "selected" : ""}>${esc(h)}</option>`).join("")}</select>
+    <label class="check"><input type="checkbox" id="wa" ${member.whatsappOptIn ? "checked" : ""}/> <span>Yes, I'd like to be in the club WhatsApp group.</span></label>
+    <label class="check"><input type="checkbox" id="news" ${member.newsOptIn ? "checked" : ""}/> <span>Send me club news by email (event announcements, a few times a month at most).</span></label>
+    <p id="msg" class="fine"></p>
+    <button class="btn btn-primary" id="save" type="button">${action}</button>`;
+}
+function renderProfile() {
+  app.innerHTML = `<p class="eyebrow">Membership</p><h1>Edit my profile</h1>${profileForm(me, "Save changes")}`;
+  const interests = new Set(me.interests || []);
+  document.querySelectorAll(".chip").forEach((chip) => chip.onclick = () => {
+    chip.classList.toggle("on");
+    chip.classList.contains("on") ? interests.add(chip.dataset.i) : interests.delete(chip.dataset.i);
+  });
+  document.getElementById("save").onclick = async () => {
+    try {
+      const data = await api("/api/me", { method: "PATCH", body: {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        mobile: document.getElementById("mobile").value,
+        region: document.getElementById("region").value,
+        teslaStatus: document.getElementById("status").value,
+        model: document.getElementById("model").value,
+        interests: [...interests],
+        heardFrom: document.getElementById("heard").value,
+        whatsappOptIn: document.getElementById("wa").checked,
+        newsOptIn: document.getElementById("news").checked,
+      }});
+      me = data.member;
+      document.getElementById("msg").textContent = "Saved.";
+    } catch (e) { document.getElementById("msg").textContent = e.message; }
+  };
+}
+function renderDelete() {
+  app.innerHTML = `<p class="eyebrow">Privacy</p><h1>Delete my data</h1>
+    <div class="card"><p>This permanently deletes your membership, profile and RSVPs from the club app, and signs you out. It can't be undone. If you're in the WhatsApp group, leave it there too.</p></div>
+    <label for="confirm">Type DELETE to confirm</label><input id="confirm" autocomplete="off" />
+    <p id="msg" class="error"></p>
+    <button class="btn btn-danger" id="go" type="button">Delete my data</button>`;
+  document.getElementById("go").onclick = async () => {
+    try {
+      await api("/api/me", { method: "DELETE", body: { confirm: document.getElementById("confirm").value } });
+      me = null;
+      setAccount();
+      location.href = "/?deleted=1";
+    } catch (e) { document.getElementById("msg").textContent = e.message; }
+  };
+}
+
+async function renderAdmin() {
+  const session = await api("/api/admin/session");
+  if (!session.ok) {
+    app.innerHTML = `<p class="eyebrow">Organisers</p><h1>Admin</h1>
+      <label for="pw">Shared organiser password</label><input id="pw" type="password" />
+      <p id="msg" class="error"></p>
+      <button class="btn btn-primary" id="in" type="button">Sign in</button>`;
+    document.getElementById("in").onclick = async () => {
+      try {
+        await api("/api/admin/login", { method: "POST", body: { password: document.getElementById("pw").value } });
+        renderAdmin();
+      } catch (e) { document.getElementById("msg").textContent = e.message; }
+    };
+    return;
+  }
+  app.innerHTML = `<p class="eyebrow">Organisers</p><h1>Admin</h1>
+    <div class="row"><button class="btn btn-secondary fit" id="tab-m" type="button">Members</button><button class="btn btn-secondary fit" id="tab-e" type="button">Events</button><button class="btn btn-secondary fit" id="out" type="button">Sign out</button></div>
+    <div id="panel" style="margin-top:16px"></div>`;
+  document.getElementById("out").onclick = async () => { await api("/api/admin/logout", { method: "POST", body: {} }); renderAdmin(); };
+  document.getElementById("tab-m").onclick = adminMembers;
+  document.getElementById("tab-e").onclick = adminEvents;
+  adminMembers();
+}
+async function adminMembers() {
+  const panel = document.getElementById("panel");
+  panel.innerHTML = `<label for="q">Search name or email</label><input id="q" />
+    <label for="region">Region</label><select id="region"><option value="">All</option>${meta.regions.map((r) => `<option>${esc(r)}</option>`).join("")}</select>
+    <label for="model">Model</label><select id="model"><option value="">All</option>${meta.models.map((r) => `<option>${esc(r)}</option>`).join("")}</select>
+    <label for="status">Status</label><select id="status"><option value="">All</option>${meta.statuses.map((r) => `<option>${esc(r)}</option>`).join("")}</select>
+    <label for="interest">Interest</label><select id="interest"><option value="">All</option>${meta.interests.map((r) => `<option>${esc(r)}</option>`).join("")}</select>
+    <div class="stack" style="margin-top:12px"><button class="btn btn-primary" id="apply" type="button">Apply</button><a class="btn btn-secondary" id="csv" href="#">Export CSV</a></div>
+    <p id="count" class="fine"></p><div id="list" class="cards"></div><div id="box"></div>`;
+  const load = async () => {
+    const params = new URLSearchParams({
+      q: document.getElementById("q").value,
+      region: document.getElementById("region").value,
+      model: document.getElementById("model").value,
+      status: document.getElementById("status").value,
+      interest: document.getElementById("interest").value,
+    });
+    document.getElementById("csv").href = "/api/admin/export?" + params.toString();
+    document.getElementById("csv").onclick = (e) => { e.stopPropagation(); };
+    const data = await api("/api/admin/members?" + params.toString());
+    document.getElementById("count").textContent = `${data.shown} shown · ${data.total} total`;
+    document.getElementById("list").innerHTML = data.members.map((m) => `<article class="card">
+      <div class="no">${esc(m.memberNo)}</div><h3>${esc(m.name)}</h3>
+      <p>${esc(m.email)}${m.mobile ? " · " + esc(m.mobile) : ""}</p>
+      <p>${esc(m.region)} · ${esc(m.teslaStatus)} · ${esc(m.model)}</p>
+      <p>${esc((m.interests || []).join(", ") || "No interests ticked")}</p>
+      <p>WhatsApp ${m.whatsappOptIn ? "yes" : "no"} · News ${m.newsOptIn ? "yes" : "no"} · Heard: ${esc(m.heardFrom || "—")}</p>
+      <p>Joined ${esc(monthYear(m.joinedAt))}</p>
+      <button class="btn btn-danger" data-del="${esc(m.id)}" type="button">Delete</button>
+    </article>`).join("") || `<article class="card"><p>No members match.</p></article>`;
+    document.querySelectorAll("[data-del]").forEach((btn) => btn.onclick = async () => {
+      if (btn.dataset.armed !== "1") { btn.dataset.armed = "1"; btn.textContent = "Confirm delete"; return; }
+      await api("/api/admin/members/" + btn.dataset.del, { method: "DELETE" });
+      load();
+    });
+    const box = await api("/api/admin/outbox");
+    document.getElementById("box").innerHTML = `<h2 style="margin-top:22px">Sign-in links</h2><div class="card"><p>${box.mailConfigured ? "Mail is configured. Sent links are not shown again." : "Local delivery — these links are not emailed until mail is configured."}</p>
+      ${box.links.map((l) => `<p>${esc(l.email)} · ${l.sent ? "sent" : `<a href="${esc(l.url)}">${esc(l.url)}</a>`}${l.error ? " · " + esc(l.error) : ""}</p>`).join("") || "<p>None yet.</p>"}</div>`;
+  };
+  document.getElementById("apply").onclick = load;
+  load();
+}
+async function adminEvents() {
+  const panel = document.getElementById("panel");
+  const data = await api("/api/admin/events");
+  panel.innerHTML = `<div class="cards">${data.events.map((e) => `<article class="card">${badge(e)}<h3>${esc(e.title)}</h3><p>${esc(when(e))} · ${esc(e.place)}</p><p>${e.published ? "Published" : "Unpublished"}</p><p>${e.counts.going} going · ${e.counts.maybe} maybe · ${e.counts.cant} can't</p><button class="btn btn-secondary" data-edit="${esc(e.id)}" type="button">Edit</button></article>`).join("")}</div>
+    <h2 style="margin-top:22px">Event</h2><div id="form"></div>`;
+  const form = (event = {}) => {
+    document.getElementById("form").innerHTML = `
+      <label>Title</label><input id="title" value="${esc(event.title || "")}" />
+      <label>Start</label><input id="start" type="datetime-local" value="${esc(toLocal(event.start))}" />
+      <label>End (optional)</label><input id="end" type="datetime-local" value="${esc(toLocal(event.end))}" />
+      <label>Place</label><input id="place" value="${esc(event.place || "")}" />
+      <label>Area</label><input id="area" value="${esc(event.area || "")}" />
+      <label>Summary</label><textarea id="summary">${esc(event.summary || "")}</textarea>
+      <label>What to bring</label><textarea id="bring">${esc(event.bring || "")}</textarea>
+      <label>Safety note</label><textarea id="safety">${esc(event.safety || "")}</textarea>
+      <label class="check"><input type="checkbox" id="example" ${event.example ? "checked" : ""}/> <span>Label as EXAMPLE – not a real event</span></label>
+      <label class="check"><input type="checkbox" id="published" ${event.published ? "checked" : ""}/> <span>Published</span></label>
+      <p id="msg" class="error"></p>
+      <div class="stack"><button class="btn btn-primary" id="save" type="button">${event.id ? "Save event" : "Create event"}</button>
+      ${event.id ? `<button class="btn btn-danger" id="del" type="button">Delete event</button>` : ""}</div>`;
+    document.getElementById("save").onclick = async () => {
+      const body = {
+        title: document.getElementById("title").value,
+        start: fromLocal(document.getElementById("start").value),
+        end: fromLocal(document.getElementById("end").value),
+        place: document.getElementById("place").value,
+        area: document.getElementById("area").value,
+        summary: document.getElementById("summary").value,
+        bring: document.getElementById("bring").value,
+        safety: document.getElementById("safety").value,
+        example: document.getElementById("example").checked,
+        published: document.getElementById("published").checked,
+      };
+      try {
+        if (event.id) await api("/api/admin/events/" + event.id, { method: "PATCH", body });
+        else await api("/api/admin/events", { method: "POST", body });
+        adminEvents();
+      } catch (e) { document.getElementById("msg").textContent = e.message; }
+    };
+    const del = document.getElementById("del");
+    if (del) del.onclick = async () => {
+      if (del.dataset.armed !== "1") { del.dataset.armed = "1"; del.textContent = "Confirm delete"; return; }
+      await api("/api/admin/events/" + event.id, { method: "DELETE" });
+      adminEvents();
+    };
+  };
+  form();
+  document.querySelectorAll("[data-edit]").forEach((btn) => btn.onclick = () => form(data.events.find((e) => e.id === btn.dataset.edit)));
+}
+function toLocal(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+function fromLocal(value) {
+  if (!value) return null;
+  const d = new Date(value);
+  const pad = (n) => String(n).padStart(2, "0");
+  const off = -d.getTimezoneOffset();
+  const sign = off >= 0 ? "+" : "-";
+  const hh = pad(Math.floor(Math.abs(off) / 60));
+  const mm = pad(Math.abs(off) % 60);
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:00${sign}${hh}:${mm}`;
+}
+
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
+(async function boot() {
+  meta = await api("/api/meta");
+  try { me = (await api("/api/me")).member; } catch { me = null; }
+  setAccount();
+  render();
+})();
+
+  </script>
+</body>
+</html>
