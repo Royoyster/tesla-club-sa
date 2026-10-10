@@ -864,6 +864,15 @@ async function renderLanding() {
       <article class="card"><h3>Light shows</h3><p>In the works. We're planning them properly with the right venue, permission and neighbours in mind.</p></article>
       <article class="card"><h3>Everyone welcome</h3><p>Own one, waiting on delivery, or just keen? You're in. No car required to join.</p></article>
     </div>
+    <h2 style="margin-top:28px">Weekly X Spaces</h2>
+    <article class="card">
+      <h3>Every week · 7pm SAST</h3>
+      <p>We host a weekly X Space to chat with new members and existing members about what we’re doing in the club and what we’re working towards. Everyone is invited — owners, fans, and anyone curious.</p>
+      <div class="stack" style="margin-top:14px">
+        <a class="btn btn-primary" href="https://x.com/teslazar/status/2108798125338952046?s=46" target="_blank" rel="noopener">Join the Space</a>
+      </div>
+      <p class="fine">Same time every week. Follow <a href="https://x.com/teslazar" target="_blank" rel="noopener">@TeslaZar</a> and turn on notifications so you don’t miss it.</p>
+    </article>
     <h2 style="margin-top:28px">Coming up</h2>
     <div class="cards">
       ${upcoming.length ? upcoming.map(eventCard).join("") : `<article class="card"><p>The next meetup date is being locked in. We'll let you know.</p></article>`}
@@ -1033,6 +1042,13 @@ async function renderHome() {
     ${next ? `<div class="card">${badge(next)}<div class="event-row">${tile(next.start)}<div><h3>${esc(next.title)}</h3><p>${esc(when(next))} · ${esc(next.place)}</p></div></div>
       <div style="margin-top:12px">${rsvpButtons(next)}</div>
       <p style="margin-top:12px"><a href="/events/${esc(next.id)}">Details & what to bring →</a></p></div>` : `<div class="card"><p>The next meetup date is being locked in. We'll let you know.</p></div>`}
+    <article class="card" style="margin-top:16px">
+      <h3>Weekly X Space · 7pm SAST</h3>
+      <p>Join us every week to talk with new and existing members about what the club is doing and where we’re heading. Everyone’s invited.</p>
+      <div class="stack" style="margin-top:12px">
+        <a class="btn btn-primary" href="https://x.com/teslazar/status/2108798125338952046?s=46" target="_blank" rel="noopener">Join the Space</a>
+      </div>
+    </article>
     <div class="stack" style="margin-top:16px">
       <a class="btn btn-wa" href="${WA}" target="_blank" rel="noopener">Join our WhatsApp group</a>
     </div>
