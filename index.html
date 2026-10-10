@@ -359,7 +359,7 @@ function seedEvents() {
       area: "Southern Suburbs (example)",
       summary: "EXAMPLE – not a real event. This shows what a monthly meetup listing will look like: coffee, walk-arounds and a short club welcome. Owners and fans welcome.",
       bring: "Your car if you have one (fans very welcome without), a jacket for the Cape wind, and questions for the new-owner corner.",
-      safety: "No convoys, no revving, no launches. Marshals will help with parking; please follow their lead. Spectators stay off the road.",
+      safety: "Marshals will help with parking; please follow their lead. Keep it relaxed and neighbourly.",
       example: true,
       published: true,
     },
@@ -372,7 +372,7 @@ function seedEvents() {
       area: "Cape Town (example)",
       summary: "EXAMPLE – not a real event. We're planning a light show using the Light Show feature built into the cars. It's run by the club, not Tesla. Members are welcome to join in. If the wind or rain is bad, or the venue asks us to, we'll move or cancel it and post an update.",
       bring: "A charged car if you're taking part, a warm layer, and patience while we park everyone.",
-      safety: "No show on public roads or road shoulders. Spectators stay off the road. Volume kept down after the venue curfew. No convoys on the way in or out.",
+      safety: "We'll plan the venue and timing properly, keep the volume respectful, and post an update if weather or access changes.",
       example: true,
       published: true,
     },
@@ -883,7 +883,7 @@ async function renderLanding() {
     <p class="fine">Free to join · takes about a minute</p>
     <div class="cards" style="margin-top:22px">
       <article class="card"><h3>Meetups</h3><p>A relaxed monthly get-together. Coffee, walk-arounds, swapping notes on charging, software and road trips.</p></article>
-      <article class="card"><h3>Scenic drives</h3><p>Organised, sensible drives on some of the best roads in the Cape. No convoys hogging the road, no racing.</p></article>
+      <article class="card"><h3>Scenic drives</h3><p>Organised drives on some of the best roads in the Cape. Quiet, smooth and properly planned.</p></article>
       <article class="card"><h3>Light shows</h3><p>In the works. We're planning them properly with the right venue, permission and neighbours in mind.</p></article>
       <article class="card"><h3>Everyone welcome</h3><p>Own one, waiting on delivery, or just keen? You're in. No car required to join.</p></article>
     </div>
@@ -900,12 +900,6 @@ async function renderLanding() {
     <div class="cards">
       ${upcoming.length ? upcoming.map(eventCard).join("") : `<article class="card"><p>The next meetup date is being locked in. We'll let you know.</p></article>`}
     </div>
-    <h2 style="margin-top:28px">How we roll</h2>
-    <div class="card"><ul class="rules">
-      <li>Respect the neighbours, the venue and the road.</li>
-      <li>No convoys, no revving, no 'launches'.</li>
-      <li>Spectators stay off the road. Always.</li>
-    </ul></div>
   `;
 }
 function eventCard(event) {
