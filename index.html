@@ -900,6 +900,13 @@ async function renderLanding() {
     <div class="cards">
       ${upcoming.length ? upcoming.map(eventCard).join("") : `<article class="card"><p>The next meetup date is being locked in. We'll let you know.</p></article>`}
     </div>
+    <h2 style="margin-top:28px">How we roll</h2>
+    <div class="card"><ul class="rules">
+      <li>Respect the neighbours, the venue and the road.</li>
+      <li>Charge before you leave and share tips on routes and chargers.</li>
+      <li>Owners, people on order and fans are all welcome.</li>
+      <li>Keep it friendly, organised and well planned.</li>
+    </ul></div>
   `;
 }
 function eventCard(event) {
